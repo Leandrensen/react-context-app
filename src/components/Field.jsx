@@ -3,7 +3,7 @@ import LanguageContext from '../contexts/LanguageContext';
 import { Box } from '@material-ui/core';
 
 const Field = () => {
-    const language = useContext(LanguageContext);
+    const { language } = useContext(LanguageContext);
 
     const text = language === 'english' ? 'Name' : 'Naam';
 

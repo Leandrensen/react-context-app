@@ -1,54 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@material-ui/core';
-import ReactCountryFlag from 'react-country-flag';
-import UserCreate from './UserCreate';
-import LanguageContext from '../contexts/LanguageContext';
+import { LanguageStore } from '../contexts/LanguageContext';
 import ColorContext from '../contexts/ColorContext';
+import LanguageSelector from './LanguageSelector';
+import UserCreate from './UserCreate';
 
-const App = (props) => {
-    const [language, setLanguage] = useState('english');
-
-    const onLanguageChange = (language) => {
-        setLanguage(language);
-    };
-
+const App = () => {
     return (
         <Box>
-            <Box>
-                <span
-                    style={{
-                        paddingRight: '2px',
-                    }}>
-                    Select a language:
-                </span>
-                <ReactCountryFlag
-                    countryCode='US'
-                    svg
-                    style={{
-                        width: '1.2em',
-                        height: '1.2em',
-                        paddingRight: '2px',
-                    }}
-                    title='US'
-                    onClick={() => onLanguageChange('english')}
-                />
-                <ReactCountryFlag
-                    countryCode='NL'
-                    svg
-                    style={{
-                        width: '1.2em',
-                        height: '1.2em',
-                        paddingRight: '2px',
-                    }}
-                    title='NL'
-                    onClick={() => onLanguageChange('dutch')}
-                />
-            </Box>
-            <ColorContext.Provider value='secondary'>
-                <LanguageContext.Provider value={language}>
+            <LanguageStore>
+                <LanguageSelector />
+                <ColorContext.Provider value='secondary'>
                     <UserCreate />
-                </LanguageContext.Provider>
-            </ColorContext.Provider>
+                </ColorContext.Provider>
+            </LanguageStore>
         </Box>
     );
 };
